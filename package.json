@@ -2,6 +2,10 @@
   "name": "nextjs-blog",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giscafer/blog"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +13,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@octokit/core": "^3.6.0",
+    "markdown-css-smartisan": "^0.0.3",
     "next": "12.1.4",
+    "normalize.css": "^8.0.1",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-markdown": "^8.0.2",
+    "simple-git": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
