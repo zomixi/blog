@@ -2,10 +2,6 @@
   "name": "nextjs-blog",
   "version": "0.1.0",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/giscafer/blog"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
