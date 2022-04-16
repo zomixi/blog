@@ -1,13 +1,31 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout";
 import { getRepositoryIssue, getRepositoryIssues } from "../../lib/github";
 import { IssueType } from "../../types";
 
 const Post: NextPage<{ dataSource?: IssueType }> = ({ dataSource }) => {
+  if (!dataSource) {
+    return <Layout></Layout>;
+  }
+
   return (
     <Layout>
-      <ReactMarkdown>{dataSource?.body || ""}</ReactMarkdown>
+      <Head>
+        <title>{dataSource.title}</title>
+        <meta name="description" content={dataSource.title} />
+        <meta
+          name="Keywords"
+          content={dataSource.labels
+            ?.map((label) => (typeof label === "string" ? label : label.name))
+            .join(",")}
+        />
+      </Head>
+      <article className="markdown-body">
+        <h1>{dataSource.title}</h1>
+        <ReactMarkdown>{dataSource.body || ""}</ReactMarkdown>
+      </article>
     </Layout>
   );
 };
@@ -29,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (params?.number) {
     const issue = await getRepositoryIssue(Number(params.number));
 
-    const { number, title, url, created_at, updated_at, body } = issue;
+    const { number, title, url, created_at, updated_at, body, labels } = issue;
 
     post = {
       number,
@@ -37,6 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       url,
       created_at,
       updated_at,
+      labels,
       body,
     };
   }

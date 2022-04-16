@@ -9,6 +9,19 @@ export type IssueType = {
   url?: string;
   /** Contents of the issue */
   body?: string | null;
+  /** Labels to associate with this issue */
+  labels?: (
+    | string
+    | {
+        id?: number;
+        node_id?: string;
+        url?: string;
+        name?: string;
+        description?: string | null;
+        color?: string | null;
+        default?: boolean;
+      }
+  )[];
   created_at?: string;
   updated_at?: string;
 };
