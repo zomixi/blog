@@ -6,13 +6,16 @@ import { OWNER } from "../config";
 import { getRepositoryIssues } from "../lib/github";
 import { PostType } from "../types";
 
-const Home: NextPage<{ posts: PostType[] }> = ({ posts = [] }) => {
+const Home: NextPage<{ posts: PostType[]; owner: string }> = ({
+  posts = [],
+  owner = "",
+}) => {
   return (
     <Layout>
       <Head>
-        <title>{`${OWNER}'s blog`}</title>
-        <meta name="description" content={`A blog site belong to ${OWNER}`} />
-        <meta name="Keywords" content={[OWNER, "blog"].join(",")} />
+        <title>{`${owner}'s blog`}</title>
+        <meta name="description" content={`A blog site belong to ${owner}`} />
+        <meta name="Keywords" content={[owner, "blog"].join(",")} />
       </Head>
 
       <article className="markdown-body">
@@ -49,6 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts,
+      owner: OWNER,
     },
   };
 };
