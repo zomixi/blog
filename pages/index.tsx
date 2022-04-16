@@ -19,6 +19,17 @@ const Home: NextPage<{ posts: PostType[]; owner: string }> = ({
       </Head>
 
       <article className="markdown-body">
+        <div
+          style={{
+            textAlign: "center",
+            fontWeight: "bolder",
+            fontSize: 48,
+            marginBottom: 48,
+          }}
+        >
+          {`${owner}'s blog`}
+        </div>
+
         <ul>
           {posts.map((post) => (
             <li key={post.title}>
