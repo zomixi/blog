@@ -3,9 +3,9 @@ import Head from "next/head";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout";
 import { getRepositoryIssue, getRepositoryIssues } from "../../lib/github";
-import { IssueType } from "../../types";
+import { PostType } from "../../types";
 
-const Post: NextPage<{ dataSource?: IssueType }> = ({ dataSource }) => {
+const Post: NextPage<{ dataSource?: PostType }> = ({ dataSource }) => {
   if (!dataSource) {
     return <Layout></Layout>;
   }
@@ -42,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let post: IssueType | null = null;
+  let post: PostType | null = null;
 
   if (params?.number) {
     const issue = await getRepositoryIssue(Number(params.number));

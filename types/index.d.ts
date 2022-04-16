@@ -1,6 +1,6 @@
 import { Key } from "react";
 
-export type IssueType = {
+export type PostType = {
   /** Title of the issue */
   title: string;
   /** Number uniquely identifying the issue within its repository */

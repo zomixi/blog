@@ -4,9 +4,9 @@ import Link from "next/link";
 import Layout from "../components/layout";
 import { OWNER } from "../config";
 import { getRepositoryIssues } from "../lib/github";
-import { IssueType } from "../types";
+import { PostType } from "../types";
 
-const Home: NextPage<{ posts: IssueType[] }> = ({ posts = [] }) => {
+const Home: NextPage<{ posts: PostType[] }> = ({ posts = [] }) => {
   return (
     <Layout>
       <Head>
@@ -35,7 +35,7 @@ const Home: NextPage<{ posts: IssueType[] }> = ({ posts = [] }) => {
 // direct database queries. See the "Technical details" section.
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getRepositoryIssues();
-  const posts: IssueType[] = issues.map((issue) => {
+  const posts: PostType[] = issues.map((issue) => {
     const { number, title } = issue;
 
     return {
