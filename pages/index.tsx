@@ -2,19 +2,17 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../components/layout";
-import { getRepositoryInfo, getRepositoryIssues } from "../lib/github";
+import { OWNER } from "../config";
+import { getRepositoryIssues } from "../lib/github";
 import { IssueType } from "../types";
 
-const Home: NextPage<{ posts: IssueType[]; owner: string }> = ({
-  posts = [],
-  owner = "",
-}) => {
+const Home: NextPage<{ posts: IssueType[] }> = ({ posts = [] }) => {
   return (
     <Layout>
       <Head>
-        <title>{`${owner}'s blog`}</title>
-        <meta name="description" content={`A blog site belong to ${owner}`} />
-        <meta name="Keywords" content={[owner, ""].join(",")} />
+        <title>{`${OWNER}'s blog`}</title>
+        <meta name="description" content={`A blog site belong to ${OWNER}`} />
+        <meta name="Keywords" content={[OWNER, "blog"].join(",")} />
       </Head>
 
       <article className="markdown-body">
@@ -36,7 +34,6 @@ const Home: NextPage<{ posts: IssueType[]; owner: string }> = ({
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
 export const getStaticProps: GetStaticProps = async () => {
-  const repository = await getRepositoryInfo();
   const issues = await getRepositoryIssues();
   const posts: IssueType[] = issues.map((issue) => {
     const { number, title } = issue;
@@ -52,7 +49,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts,
-      owner: repository.owner,
     },
   };
 };

@@ -15,8 +15,7 @@
     "normalize.css": "^8.0.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-markdown": "^8.0.2",
-    "simple-git": "^3.6.0"
+    "react-markdown": "^8.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
